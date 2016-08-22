@@ -9,6 +9,8 @@ public abstract class Command {
 		setArgs(args);
 	}
 	
+	public abstract String getBf();
+	
 	public abstract String getMnemonic();
 
 	public abstract int[] getArgs();
