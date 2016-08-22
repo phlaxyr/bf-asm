@@ -45,11 +45,11 @@ public class SetCommand extends Command {
 	public String getBf() {
 		StringBuilder ret = new StringBuilder();
 
-		ret.append(AddrToGenerator.getAddrTo(2 * arg0));
+		ret.append(AddrToGenerator.getAddrTo(2 * arg0 + 2));
 		
 		ret.append(NumberConstantGenerator.getConstant(arg1));
 		
-		ret.append(AddrToGenerator.getAddrTo(-2 * arg0));
+		ret.append(AddrToGenerator.getAddrTo(-2 * arg0 - 2));
 		
 		return ret.toString();
 	}
