@@ -4,7 +4,7 @@ public final class NumberConstantGenerator {
 	
 	private NumberConstantGenerator() {}
 	
-	public static String getConstant(int inp) {
+	public static final String getConstant(int inp) {
 		//TODO: implement proper generation; current code is placeholder
 		
 		String ret = "";
