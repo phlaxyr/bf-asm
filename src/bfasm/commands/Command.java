@@ -43,7 +43,7 @@ public abstract class Command {
 		
 		int[] args = new int[str.length - 1];
 		for(int i = 1; i < str.length; i++)
-			args[i] = Integer.parseInt(str[i]);
+			args[i - 1] = Integer.parseInt(str[i]);
 		
 		return cmd.getClone().setArgs(args);
 	}

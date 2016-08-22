@@ -54,4 +54,8 @@ public class SetCommand extends Command {
 		return ret.toString();
 	}
 
+	public static void register() {
+		Command.registerCommand(new SetCommand());
+	}
+
 }
