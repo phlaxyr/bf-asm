@@ -1,7 +1,7 @@
 package bfasm.commands;
 
-import bfasm.generators.AddrToGenerator;
-import bfasm.generators.NumberConstantGenerator;
+import bfasm.generators.AddrGen;
+import bfasm.generators.NumberGen;
 
 public class SetCommand extends Command {
 	int arg0, arg1;
@@ -45,11 +45,7 @@ public class SetCommand extends Command {
 	public String getBf() {
 		StringBuilder ret = new StringBuilder();
 
-		ret.append(AddrToGenerator.getAddrTo(2 * arg0 + 2));
-		
-		ret.append(NumberConstantGenerator.getConstant(arg1));
-		
-		ret.append(AddrToGenerator.getAddrTo(-2 * arg0 - 2));
+		ret.append(AddrGen.doAt(ret, NumberGen.getConstant(arg1), AddrGen.getDataCell(arg0)));
 		
 		return ret.toString();
 	}

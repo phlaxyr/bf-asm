@@ -1,8 +1,8 @@
 package bfasm.generators;
 
-public final class NumberConstantGenerator {
+public final class NumberGen {
 	
-	private NumberConstantGenerator() {}
+	private NumberGen() {}
 	
 	public static final String getConstant(int inp) {
 		//TODO: implement proper generation; current code is placeholder
