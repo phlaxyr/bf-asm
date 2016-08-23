@@ -19,10 +19,10 @@ public class MovCommand extends Command {
 	public String getBf() {
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append(AddrGen.doAt(sb, "[-", AddrGen.getDataCell(arg0)));
-		sb.append(AddrGen.doAt(sb, "+", AddrGen.getDataCell(arg1)));
-		sb.append(AddrGen.doAt(sb, "+]", AddrGen.getTempCell(arg0)));
-		sb.append(AddrGen.doAt(sb, "[-<+>]", AddrGen.getTempCell(arg0)));
+		AddrGen.doAt(sb, "[-", AddrGen.getDataCell(arg0));
+		AddrGen.doAt(sb, "+", AddrGen.getDataCell(arg1));
+		AddrGen.doAt(sb, "+]", AddrGen.getTempCell(arg0));
+		AddrGen.doAt(sb, "[-<+>]", AddrGen.getTempCell(arg0));
 		return sb.toString();
 	}
 

@@ -45,7 +45,7 @@ public class SetCommand extends Command {
 	public String getBf() {
 		StringBuilder ret = new StringBuilder();
 
-		ret.append(AddrGen.doAt(ret, NumberGen.getConstant(arg1), AddrGen.getDataCell(arg0)));
+		AddrGen.doAt(ret, NumberGen.getConstant(arg1), AddrGen.getDataCell(arg0));
 		
 		return ret.toString();
 	}
