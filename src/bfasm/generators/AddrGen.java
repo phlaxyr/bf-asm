@@ -1,8 +1,9 @@
 package bfasm.generators;
 
-public final class AddrGen {
+public class AddrGen {
+	private int lastaddr = 0;
 	
-	private AddrGen() {}
+	public AddrGen() {}
 	
 	public static final String getAddrTo(int to) {
 		return getAddrTo(0,to);
@@ -35,10 +36,28 @@ public final class AddrGen {
 	
 	public static StringBuilder doAt(StringBuilder sb, String ins, int to) {
 		
-		sb.append(AddrGen.getAddrTo(0, to));
+		return doAt(sb, ins, 0, to);
+	}
+	
+	public static StringBuilder doAt(StringBuilder sb, String ins, int from, int to) {
+		
+		
+		sb.append(AddrGen.getAddrTo(from, to));
 		sb.append(ins);
-		sb.append(AddrGen.getAddrTo(to, 0));
+		sb.append(AddrGen.getAddrTo(to, from));
 		
 		return sb;
+	}
+	
+	public StringBuilder doNext(StringBuilder sb, String ins, int to) {
+		sb.append(AddrGen.getAddrTo(lastaddr, to));
+		sb.append(ins);
+		
+		lastaddr = to;
+		return sb;
+	}
+	
+	public void reset(StringBuilder sb) {
+		sb.append(AddrGen.getAddrTo(lastaddr, 0));
 	}
 }
