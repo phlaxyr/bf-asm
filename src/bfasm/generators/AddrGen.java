@@ -9,7 +9,7 @@ public final class AddrGen {
 	}
 	
 	public static final String getAddrTo(int from, int to) {
-		int move = from - to;
+		int move = to - from;
 		
 		char appendchar = (move > 0) ? '>' : '<';
 		
