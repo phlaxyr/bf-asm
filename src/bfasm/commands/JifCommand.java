@@ -1,14 +1,14 @@
 package bfasm.commands;
 
-public class JezCommand extends Command {
+public class JifCommand extends Command {
 	
-	int mem, to_true, to_false;
+	int mem, to;
 	
-	private JezCommand() {
-		this(new int[]{0, 0, 0});
+	private JifCommand() {
+		this(new int[]{0, 0,});
 	}
 
-	public JezCommand(int[] args) {
+	public JifCommand(int[] args) {
 		super(args);
 	}
 
@@ -20,7 +20,7 @@ public class JezCommand extends Command {
 
 	@Override
 	public String getMnemonic() {
-		return "JEZ";
+		return "JIF";
 	}
 
 	@Override
@@ -36,12 +36,12 @@ public class JezCommand extends Command {
 	}
 
 	@Override
-	public Command getClone() {
-		return new JezCommand();
+	public Command getClone(int[] args) {
+		return new JifCommand(args);
 	}
 	
 	public void register() {
-		Command.registerCommand(new JezCommand());
+		Command.registerCommand(new JifCommand());
 	}
 
 }
