@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import bfasm.commands.Command;
+import bfasm.commands.MovCommand;
+import bfasm.commands.SetCommand;
+import bfasm.generators.NumberGen;
 import bfasm.commands.LblCommand;
 import bfasm.generators.Optimizer;
 
@@ -22,5 +25,7 @@ public class Main {
 		}
 		String command = p.getBf();
 		System.out.println(Optimizer.removeRedundancy(command));
+		String test = NumberGen.getConstant(564);
+		System.out.println(test);
 	}	
 }
