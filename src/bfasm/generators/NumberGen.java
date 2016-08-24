@@ -1,7 +1,5 @@
 package bfasm.generators;
 
-import javafx.util.Pair;
-
 import static java.lang.Math.floor;
 import static java.lang.Math.sqrt;
 
@@ -13,13 +11,16 @@ public final class NumberGen {
 		//TODO: implement adding c
 
 		int ab[] = getLowestFactors(n);
-		int a = ab[0]; int b = ab[1];
+		int a = ab[0];
+		int b = ab[1];
+		
+		String ch = (n > 0) ? "+" : "-";
 
-		StringBuilder result = new StringBuilder("");
+		StringBuilder result = new StringBuilder();
 		result.append(">");
-		result.append(new String(new char[a]).replace("\0", "+")); // repeating + a times
+		result.append(repeat(a,"+")); // repeating + a times
 		result.append("[<");
-		result.append(new String(new char[b]).replace("\0", n > 0 ? "+" : "-"));
+		result.append(repeat(b, ch));
 		result.append(">-]<");
 
 		return result.toString();
@@ -34,5 +35,14 @@ public final class NumberGen {
 
 		int b = n / a;
 		return new int[]{a, b};
+	}
+	
+	public static String repeat(int times, String tr) {
+		StringBuilder sb = new StringBuilder();
+		
+		for(int i = 0; i < times; i++)
+			sb.append(tr);
+		
+		return sb.toString();
 	}
 }
