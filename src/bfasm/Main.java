@@ -17,7 +17,7 @@ public class Main {
 		Parser.init();
 		
 		
-		Parser p = null	;
+		Parser p = new Parser(new Scanner(""));
 		try {
 			p = new Parser(new Scanner(new FileInputStream("testfile.txt")));
 		} catch (FileNotFoundException e) {
