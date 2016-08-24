@@ -10,7 +10,7 @@ public class MovCommand extends Command {
 	private MovCommand() {
 		super(new int[]{0,0});
 	}
-	
+
 	public MovCommand(int[] args) {
 		super(args);
 	}
@@ -46,7 +46,7 @@ public class MovCommand extends Command {
 	public Command setArgs(int[] args) {
 		
 		if(args.length != 2)
-			throw new RuntimeException("Incorrect number of arguments to SET! Expected 2, got "+args.length);
+			throw new RuntimeException("Incorrect number of arguments to MOV! Expected 2, got "+args.length);
 		
 		this.arg0 = args[0];
 		this.arg1 = args[1];

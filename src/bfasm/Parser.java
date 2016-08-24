@@ -4,12 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-import bfasm.commands.AddCommand;
-import bfasm.commands.Command;
-import bfasm.commands.HltCommand;
-import bfasm.commands.LblCommand;
-import bfasm.commands.MovCommand;
-import bfasm.commands.SetCommand;
+import bfasm.commands.*;
 
 public class Parser {
 	Scanner fscan;
@@ -24,6 +19,8 @@ public class Parser {
 		AddCommand.register();
 		LblCommand.register();
 		HltCommand.register();
+		InpCommand.register();
+		OutCommand.register();
 	}
 	
 	public String getBf() {
@@ -59,7 +56,17 @@ public class Parser {
 					}
 				}
 				recent = lbcl;
-			} else recent.addCommand(c);
+			} else {
+				try {
+					recent.addCommand(c);
+				} catch (NullPointerException e)  {
+					System.out.println("Added implicit LBL 0");
+					recent = new LblCommand(new int[]{0});
+					recent.addCommand(c);
+
+					labels.add(0, recent);
+				}
+			}
 		}
 		
 		Collections.reverse(labels);

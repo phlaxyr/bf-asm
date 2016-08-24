@@ -17,7 +17,7 @@ public class Main {
 		Parser.init();
 		
 		
-		Parser p = null	;
+		Parser p = new Parser(new Scanner(""));
 		try {
 			p = new Parser(new Scanner(new FileInputStream("testfile.txt")));
 		} catch (FileNotFoundException e) {
@@ -25,7 +25,6 @@ public class Main {
 		}
 		String command = p.getBf();
 		System.out.println(Optimizer.removeRedundancy(command));
-		String test = NumberGen.getConstant(564);
 		System.out.println(test);
 	}	
 }
