@@ -33,8 +33,8 @@ public class HltCommand extends Command {
 	}
 
 	@Override
-	public Command getClone() {
-		return new HltCommand();
+	public Command getClone(int[] args) {
+		return new HltCommand(args);
 	}
 	
 	public static void register() {

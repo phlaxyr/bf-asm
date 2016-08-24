@@ -53,8 +53,8 @@ public class AddCommand extends Command {
 	}
 
 	@Override
-	public Command getClone() {
-		return new AddCommand();
+	public Command getClone(int[] args) {
+		return new AddCommand(args);
 	}
 
 	public static void register() {

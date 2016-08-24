@@ -37,8 +37,8 @@ public class SetCommand extends Command {
 	}
 
 	@Override
-	public Command getClone() {
-		return new SetCommand();
+	public Command getClone(int[] args) {
+		return new SetCommand(args);
 	}
 
 	@Override

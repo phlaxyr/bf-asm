@@ -45,8 +45,8 @@ public abstract class Command {
 		for(int i = 1; i < str.length; i++)
 			args[i - 1] = Integer.parseInt(str[i]);
 		
-		return cmd.getClone().setArgs(args);
+		return cmd.getClone(args);
 	}
 	
-	public abstract Command getClone();
+	public abstract Command getClone(int[] args);
 }

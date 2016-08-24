@@ -55,8 +55,8 @@ public class MovCommand extends Command {
 	}
 
 	@Override
-	public Command getClone() {
-		return new MovCommand();
+	public Command getClone(int[] args) {
+		return new MovCommand(args);
 	}
 
 	public static void register() {
