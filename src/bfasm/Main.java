@@ -1,23 +1,26 @@
 package bfasm;
 
-import bfasm.commands.AddCommand;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import bfasm.commands.Command;
-import bfasm.commands.MovCommand;
-import bfasm.commands.SetCommand;
+import bfasm.commands.LblCommand;
 import bfasm.generators.Optimizer;
 
 public class Main {
 	public static void main(String[] args) {
-		SetCommand.register();
-		MovCommand.register();
-		AddCommand.register();
 		
-		String command = ">+<"+Command.getCommand("SET 5 8")
-				.getBf()+Command.getCommand("MOV 5 6")
-				.getBf()+Command.getCommand("ADD 5 6")
-				.getBf();
-
-		System.out.println(command);
+		Parser.init();
+		
+		
+		Parser p = null	;
+		try {
+			p = new Parser(new Scanner(new FileInputStream("testfile.txt")));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		String command = p.getBf();
 		System.out.println(Optimizer.removeRedundancy(command));
 	}	
 }
