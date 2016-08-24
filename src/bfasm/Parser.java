@@ -7,6 +7,7 @@ import java.util.Scanner;
 import bfasm.commands.AddCommand;
 import bfasm.commands.Command;
 import bfasm.commands.HltCommand;
+import bfasm.commands.JitCommand;
 import bfasm.commands.LblCommand;
 import bfasm.commands.MovCommand;
 import bfasm.commands.SetCommand;
@@ -23,6 +24,7 @@ public class Parser {
 		MovCommand.register();
 		AddCommand.register();
 		LblCommand.register();
+		JitCommand.register();
 		HltCommand.register();
 	}
 	
