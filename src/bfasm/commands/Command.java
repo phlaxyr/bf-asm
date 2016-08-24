@@ -1,6 +1,8 @@
 package bfasm.commands;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Formatter;
 
 public abstract class Command {
 	private static final ArrayList<Command> commands = new ArrayList<>();
@@ -49,4 +51,12 @@ public abstract class Command {
 	}
 	
 	public abstract Command getClone(int[] args);
+	
+	@Override
+	public String toString() {
+		Formatter formatter = new Formatter();
+		String s = formatter.format("%s %s", this.getMnemonic(), Arrays.toString(this.getArgs())).toString();
+		formatter.close();
+		return s;
+	}
 }
