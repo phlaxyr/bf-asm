@@ -17,6 +17,7 @@ public class Parser {
 		SetCommand.register();
 		MovCommand.register();
 		AddCommand.register();
+		SubCommand.register();
 		LblCommand.register();
 		HltCommand.register();
 		InpCommand.register();

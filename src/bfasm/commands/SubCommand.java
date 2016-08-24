@@ -21,7 +21,7 @@ public class SubCommand extends Command {
 		AddrGen ag = new AddrGen();
 		
 		ag.doNext(sb, "[-", AddrGen.getDataCell(arg1));
-		ag.doNext(sb, "+", AddrGen.getDataCell(arg0));
+		ag.doNext(sb, "-", AddrGen.getDataCell(arg0));
 		ag.doNext(sb, "+", AddrGen.getTempCell(arg1));
 		ag.doNext(sb, "]", AddrGen.getDataCell(arg1));
 		ag.doNext(sb, "[-<+>]", AddrGen.getTempCell(arg1));
@@ -32,7 +32,7 @@ public class SubCommand extends Command {
 
 	@Override
 	public String getMnemonic() {
-		return "ADD";
+		return "SUB";
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class SubCommand extends Command {
 	public Command setArgs(int[] args) {
 		
 		if(args.length != 2)
-			throw new RuntimeException("Incorrect number of arguments to ADD! Expected 2, got "+args.length);
+			throw new RuntimeException("Incorrect number of arguments to SUB! Expected 2, got "+args.length);
 		
 		this.arg0 = args[0];
 		this.arg1 = args[1];
