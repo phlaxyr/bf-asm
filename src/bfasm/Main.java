@@ -25,6 +25,5 @@ public class Main {
 		}
 		String command = p.getBf();
 		System.out.println(Optimizer.removeRedundancy(command));
-		System.out.println(test);
 	}	
 }
