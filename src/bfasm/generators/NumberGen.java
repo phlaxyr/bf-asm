@@ -10,7 +10,7 @@ public final class NumberGen {
 	private NumberGen() {}
 	
 	public static final String getConstant(int n) {
-		//TODO: implement proper generation; current code is placeholder
+		//TODO: implement adding c
 
 		int ab[] = getLowestFactors(n);
 		int a = ab[0]; int b = ab[1];
