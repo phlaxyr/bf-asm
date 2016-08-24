@@ -4,6 +4,7 @@ import bfasm.commands.AddCommand;
 import bfasm.commands.Command;
 import bfasm.commands.MovCommand;
 import bfasm.commands.SetCommand;
+import bfasm.generators.NumberGen;
 import bfasm.generators.Optimizer;
 
 public class Main {
@@ -19,5 +20,7 @@ public class Main {
 
 		System.out.println(command);
 		System.out.println(Optimizer.removeRedundancy(command));
+		String test = NumberGen.getConstant(564);
+		System.out.println(test);
 	}	
 }
