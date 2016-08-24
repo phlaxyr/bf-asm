@@ -9,7 +9,7 @@ import java.util.List;
 
 public class LblCommand extends ParentCommand {
 	
-	ArrayList<Command> subcommands;
+	ArrayList<Command> subcommands = new ArrayList<>();
 	
 	static HashMap<Integer, LblCommand> uhm = new HashMap<>();
 	

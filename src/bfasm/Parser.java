@@ -26,16 +26,18 @@ public class Parser {
 	}
 	
 	public String getBf() {
-		ArrayList<Command> commands = new ArrayList<>();
 		ArrayList<LblCommand> labels = new ArrayList<>();
+		
 		while(fscan.hasNext()) {
 			String line = fscan.nextLine();
 			Command c = Command.getCommand(line);
+			
+			if(!c.getMnemonic().equals("LBL"))
+				labels.get(labels.size() - 1).addCommand(c);
+			
 			if(c.getMnemonic().equals("LBL")) {
-				((LblCommand) c).setSubCommands(commands);
 				labels.add((LblCommand) c);
-				commands.clear();
-			} else commands.add(c);
+			}
 		}
 	
 		return LblCommand.wrapProgram(labels.toArray(new LblCommand[]{}));
