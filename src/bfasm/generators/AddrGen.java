@@ -34,6 +34,10 @@ public class AddrGen {
 		return 2 * cellnum + 3;
 	}
 	
+	public static int getLabelCell(int cellnum) {
+		return -cellnum-1;
+	}
+	
 	public static StringBuilder doAt(StringBuilder sb, String ins, int to) {
 		
 		return doAt(sb, ins, 0, to);

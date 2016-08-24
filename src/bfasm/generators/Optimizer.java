@@ -19,7 +19,7 @@ public final class Optimizer {
 		
 		for(int i = 0; i < sb.length(); i++) {
 			char c = sb.charAt(i);
-			if(c == '<' || c == '>') 
+			if(c == '<') 
 				continue;
 			else {
 				ret = sb.substring(i);
