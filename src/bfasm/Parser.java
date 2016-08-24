@@ -1,6 +1,7 @@
 package bfasm;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 import bfasm.commands.AddCommand;
@@ -26,20 +27,43 @@ public class Parser {
 	}
 	
 	public String getBf() {
-		ArrayList<LblCommand> labels = new ArrayList<>();
+		
+		ArrayList<Command> cmds = new ArrayList<>();
 		
 		while(fscan.hasNext()) {
 			String line = fscan.nextLine();
 			Command c = Command.getCommand(line);
 			
-			if(!c.getMnemonic().equals("LBL"))
-				labels.get(labels.size() - 1).addCommand(c);
-			
-			if(c.getMnemonic().equals("LBL")) {
-				labels.add((LblCommand) c);
-			}
+			cmds.add(c);
 		}
-	
+		
+		ArrayList<LblCommand> labels = new ArrayList<>();
+		LblCommand recent = null;
+		
+		for(Command c : cmds) {
+			System.out.println(c);
+			
+			if(c instanceof LblCommand) {
+				
+				//TODO: Binary insertion to replace ugly inefficient code
+				
+				LblCommand lbcl = ((LblCommand) c);
+				if(labels.size() == 0)
+					labels.add(lbcl);
+				else for (int i = 0; i < labels.size(); i++) {
+					LblCommand lbc = labels.get(i);
+					
+					if(lbc.lblnum < lbcl.lblnum) {
+						labels.add(i, lbcl);
+						break;
+					}
+				}
+				recent = lbcl;
+			} else recent.addCommand(c);
+		}
+		
+		Collections.reverse(labels);
+		
 		return LblCommand.wrapProgram(labels.toArray(new LblCommand[]{}));
 	}
 }

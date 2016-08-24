@@ -2,16 +2,12 @@ package bfasm.commands;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
 
 public class LblCommand extends ParentCommand {
 	
 	ArrayList<Command> subcommands = new ArrayList<>();
 	
-	static HashMap<Integer, LblCommand> uhm = new HashMap<>();
+	public static ArrayList<LblCommand> uhm = new ArrayList<>();
 	
 	
 	public int lblnum;
@@ -24,8 +20,6 @@ public class LblCommand extends ParentCommand {
 		super(args);
 		
 		lblnum = args[0];
-		
-		uhm.put(lblnum, this);
 	}
 
 	@Override
@@ -35,7 +29,7 @@ public class LblCommand extends ParentCommand {
 
 	@Override
 	public void setSubCommands(ArrayList<Command> commands) {
-		subcommands = commands;
+		subcommands = new ArrayList<>(commands);
 
 	}
 
@@ -76,8 +70,8 @@ public class LblCommand extends ParentCommand {
 	}
 
 	@Override
-	public Command getClone() {
-		return new LblCommand();
+	public Command getClone(int[] args) {
+		return new LblCommand(args);
 	}
 	
 	public static String wrapProgram(LblCommand[]labels) {
@@ -85,18 +79,12 @@ public class LblCommand extends ParentCommand {
 		StringBuilder prepos = new StringBuilder();
 		StringBuilder tmp = new StringBuilder();
 		StringBuilder tmp2 = new StringBuilder();
-		List<LblCommand> l = Arrays.asList(labels);
-		Collections.sort(l, new Comparator<LblCommand>(){
 
-			@Override
-			public int compare(LblCommand arg0, LblCommand arg1) {
-				return Integer.compare(arg0.lblnum, arg1.lblnum);
-			}
-			
-		});
 		
+		System.out.println(Arrays.asList(labels));
 		for (int i = 0; i < labels.length; i++) {
-			String label = l.get(i).getBf();
+			System.out.println(labels[i].subcommands);
+			String label = labels[i].getBf();
 			prepos.append(">");
 
 			tmp.append("<");
@@ -121,5 +109,9 @@ public class LblCommand extends ParentCommand {
 
 	public static void register() {
 		Command.registerCommand(new LblCommand());
+	}
+	
+	protected static void clear() {
+		uhm.clear();
 	}
 }
