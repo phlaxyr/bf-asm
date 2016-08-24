@@ -1,7 +1,6 @@
 package bfasm.commands;
 
 import bfasm.generators.AddrGen;
-import bfasm.generators.NumberGen;
 
 public class AddCommand extends Command {
 

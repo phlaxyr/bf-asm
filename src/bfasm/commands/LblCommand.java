@@ -11,8 +11,8 @@ public class LblCommand extends ParentCommand {
 	
 	ArrayList<Command> subcommands;
 	
-	static HashMap<Integer, Integer> uhm = new HashMap<>();
-	static int curnum = 0;
+	static HashMap<Integer, LblCommand> uhm = new HashMap<>();
+	
 	
 	public int lblnum;
 	
@@ -23,8 +23,9 @@ public class LblCommand extends ParentCommand {
 	public LblCommand(int[] args) {
 		super(args);
 		
-		lblnum = curnum;
-		uhm.put(curnum++, args[0]);
+		lblnum = args[0];
+		
+		uhm.put(lblnum, this);
 	}
 
 	@Override
