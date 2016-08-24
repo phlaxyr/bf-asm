@@ -25,7 +25,6 @@ public class Main {
 		}
 		String command = p.getBf();
 		System.out.println(Optimizer.removeRedundancy(command));
-		String test = NumberGen.getConstant(564);
 		System.out.println(test);
 	}	
 }
