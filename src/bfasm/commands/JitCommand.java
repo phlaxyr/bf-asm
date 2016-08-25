@@ -1,5 +1,7 @@
 package bfasm.commands;
 
+import bfasm.generators.AddrGen;
+
 public class JitCommand extends Command {
 	
 	public int mem, to;
@@ -14,7 +16,17 @@ public class JitCommand extends Command {
 
 	@Override
 	public String getBf() {
-		return null;
+		StringBuilder sb = new StringBuilder();
+		
+		AddrGen addr = new AddrGen();
+		
+		addr.doNext(sb, "[->+<", AddrGen.getDataCell(mem));
+		addr.doNext(sb, "[-]+", AddrGen.getLabelCell(to));
+		addr.doNext(sb, "]>[-<+>]<", AddrGen.getDataCell(mem));
+		
+		addr.reset(sb);
+		
+		return sb.toString();
 	}
 
 	@Override

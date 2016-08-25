@@ -4,11 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import bfasm.commands.Command;
-import bfasm.commands.MovCommand;
-import bfasm.commands.SetCommand;
-import bfasm.generators.NumberGen;
-import bfasm.commands.LblCommand;
 import bfasm.generators.Optimizer;
 
 public class Main {
