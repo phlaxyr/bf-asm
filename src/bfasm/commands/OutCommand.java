@@ -17,10 +17,8 @@ public class OutCommand extends Command {
     @Override
     public String getBf() {
         StringBuilder sb = new StringBuilder();
-        AddrGen ag = new AddrGen();
 
-        ag.doNext(sb, ".", ag.getDataCell(arg0));
-        ag.reset(sb);
+        AddrGen.doAt(sb, ".", AddrGen.getDataCell(arg0));
 
         return sb.toString();
     }
