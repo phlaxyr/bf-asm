@@ -25,6 +25,7 @@ public class Parser {
 		InpCommand.register();
 		OutCommand.register();
 		NotCommand.register();
+		GtrCommand.register();
 	}
 	
 	public String getBf() {
