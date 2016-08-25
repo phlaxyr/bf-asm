@@ -59,4 +59,6 @@ public abstract class Command {
 		formatter.close();
 		return s;
 	}
+
+	public void setLabels(ArrayList<LblCommand> labels) { }
 }

@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import bfasm.commands.*;
 
+
 public class Parser {
 	Scanner fscan;
 	
@@ -23,6 +24,9 @@ public class Parser {
 		InpCommand.register();
 		OutCommand.register();
 		JitCommand.register();
+		NotCommand.register();
+		GtrCommand.register();	//Not fully done yet, must be fixed
+		BptCommand.register();
 	}
 	
 	public String getBf() {
@@ -60,6 +64,7 @@ public class Parser {
 				recent = lbcl;
 			} else {
 				try {
+					c.setLabels(labels);
 					recent.addCommand(c);
 				} catch (NullPointerException e)  {
 					System.out.println("Added implicit LBL 0");
