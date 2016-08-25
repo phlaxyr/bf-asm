@@ -19,7 +19,7 @@ public class OutCommand extends Command {
         StringBuilder sb = new StringBuilder();
         AddrGen ag = new AddrGen();
 
-        ag.doNext(sb, ".", ag.getTempCell(arg0));
+        ag.doNext(sb, ".", ag.getDataCell(arg0));
         ag.reset(sb);
 
         return sb.toString();
