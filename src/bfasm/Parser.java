@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-<<<<<<< HEAD
+
 import bfasm.commands.AddCommand;
 import bfasm.commands.Command;
 import bfasm.commands.HltCommand;
@@ -12,9 +12,9 @@ import bfasm.commands.JitCommand;
 import bfasm.commands.LblCommand;
 import bfasm.commands.MovCommand;
 import bfasm.commands.SetCommand;
-=======
+
 import bfasm.commands.*;
->>>>>>> master
+
 
 public class Parser {
 	Scanner fscan;
