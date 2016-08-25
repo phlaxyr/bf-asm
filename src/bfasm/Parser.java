@@ -4,15 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-
-import bfasm.commands.AddCommand;
-import bfasm.commands.Command;
-import bfasm.commands.HltCommand;
-import bfasm.commands.JitCommand;
-import bfasm.commands.LblCommand;
-import bfasm.commands.MovCommand;
-import bfasm.commands.SetCommand;
-
 import bfasm.commands.*;
 
 
@@ -70,6 +61,7 @@ public class Parser {
 				recent = lbcl;
 			} else {
 				try {
+					c.setLabels(labels);
 					recent.addCommand(c);
 				} catch (NullPointerException e)  {
 					System.out.println("Added implicit LBL 0");
