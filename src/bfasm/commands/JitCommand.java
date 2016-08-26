@@ -30,8 +30,11 @@ public class JitCommand extends Command {
 		AddrGen addr = new AddrGen();
 		
 		addr.doNext(sb, "[->+<", AddrGen.getDataCell(mem));
-		addr.doNext(sb, "[-]+", AddrGen.getLabelCell(to, labels));
+		addr.doNext(sb, "[-]+", AddrGen.getTempCell(mem + 1));
 		addr.doNext(sb, "]>[-<+>]<", AddrGen.getDataCell(mem));
+		addr.doNext(sb, "[-", AddrGen.getTempCell(mem + 1));
+		addr.doNext(sb, "+", AddrGen.getLabelCell(to, labels));
+		addr.doNext(sb, "]", AddrGen.getTempCell(mem + 1));
 		
 		addr.reset(sb);
 		

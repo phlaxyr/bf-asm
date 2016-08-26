@@ -20,10 +20,10 @@ public class Parser {
 		AddCommand.register();
 		SubCommand.register();
 		LblCommand.register();
-		JitCommand.register();
 		HltCommand.register();
 		InpCommand.register();
 		OutCommand.register();
+		JitCommand.register();
 		NotCommand.register();
 		GtrCommand.register();	//Not fully done yet, must be fixed
 		BptCommand.register();
