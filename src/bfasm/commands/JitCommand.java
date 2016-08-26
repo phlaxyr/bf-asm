@@ -1,10 +1,14 @@
 package bfasm.commands;
 
+import java.util.ArrayList;
+
 import bfasm.generators.AddrGen;
 
 public class JitCommand extends Command {
 	
 	public int mem, to;
+	
+	private ArrayList<LblCommand> labels;
 	
 	private JitCommand() {
 		this(new int[]{0,0});
@@ -15,14 +19,22 @@ public class JitCommand extends Command {
 	}
 
 	@Override
+	public void setLabels(ArrayList<LblCommand> labels) {
+		this.labels = labels;
+	}
+	
+	@Override
 	public String getBf() {
 		StringBuilder sb = new StringBuilder();
 		
 		AddrGen addr = new AddrGen();
 		
 		addr.doNext(sb, "[->+<", AddrGen.getDataCell(mem));
-		addr.doNext(sb, "[-]+", AddrGen.getLabelCell(to));
+		addr.doNext(sb, "[-]+", AddrGen.getTempCell(mem + 1));
 		addr.doNext(sb, "]>[-<+>]<", AddrGen.getDataCell(mem));
+		addr.doNext(sb, "[-", AddrGen.getTempCell(mem + 1));
+		addr.doNext(sb, "+", AddrGen.getLabelCell(to, labels));
+		addr.doNext(sb, "]", AddrGen.getTempCell(mem + 1));
 		
 		addr.reset(sb);
 		

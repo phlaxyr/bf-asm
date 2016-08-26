@@ -1,5 +1,9 @@
 package bfasm.generators;
 
+import java.util.ArrayList;
+
+import bfasm.commands.LblCommand;
+
 public class AddrGen {
 	private int lastaddr = 0;
 	
@@ -34,7 +38,15 @@ public class AddrGen {
 		return 2 * cellnum + 3;
 	}
 	
-	public static int getLabelCell(int cellnum) {
+	public static int getLabelCell(int cellnum, ArrayList<LblCommand> labels) {
+		
+		for(int i = 0;i < labels.size(); i++) {
+			if(labels.get(i).lblnum == cellnum) {
+				cellnum = i;
+				break;
+			}
+		}
+		
 		return -cellnum-1;
 	}
 	

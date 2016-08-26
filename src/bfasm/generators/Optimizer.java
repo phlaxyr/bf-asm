@@ -29,7 +29,7 @@ public final class Optimizer {
 		
 		for(int i = ret.length() - 1; i > 0; i--) {
 			char c = ret.charAt(i);
-			if(c == '<' || c == '>') 
+			if(c == '<' || c == '>' || c == '+' || c == '-' || c == ',') 
 				continue;
 			else {
 				ret = ret.substring(0, i + 1);
