@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import bfasm.generators.AddrGen;
 
-public class JitCommand extends Command {
+public class JitCommand extends Command implements BranchingCommand {
 	
 	public int mem, to;
 	
