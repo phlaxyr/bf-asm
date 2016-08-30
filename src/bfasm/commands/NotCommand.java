@@ -18,15 +18,12 @@ public class NotCommand extends Command {
 	@Override
 	public String getBf() {
 		StringBuilder sb = new StringBuilder();
-		AddrGen ag = new AddrGen();
 		
-		ag.doNext(sb, "[->+<", AddrGen.getDataCell(arg0));
-		ag.doNext(sb, "[-]+", AddrGen.getTempCell(arg1));
-		ag.doNext(sb, "]", AddrGen.getDataCell(arg0));
-		ag.doNext(sb, "[-<+>]", AddrGen.getTempCell(arg0));
-		ag.doNext(sb, "-[+<+>]", AddrGen.getTempCell(arg1));
-		
-		ag.reset(sb);
+		AddrGen.doFormat(sb, "a[->+<t1[-]+a]t0[-<+>]t1-[+<+>]", 
+				"a", AddrGen.getDataCell(arg0),
+				"b", AddrGen.getDataCell(arg1),
+				"t0", AddrGen.getTempCell(arg0),
+				"t1", AddrGen.getTempCell(arg1));
 		
 		return sb.toString();
 	}
