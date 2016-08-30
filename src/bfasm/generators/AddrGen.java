@@ -73,6 +73,51 @@ public class AddrGen {
 		return sb;
 	}
 	
+	public static StringBuilder doFormat(StringBuilder sb, String toformat, Object...inp) {
+		ArrayList<String> inpstrings = new ArrayList<>();
+		ArrayList<Integer> inptos = new ArrayList<>();
+		
+		// Get all the string / int pairs
+		for(int i = 0; i < inp.length; i += 2) {
+			inpstrings.add((String) inp[i]);
+			inptos.add((int) inp[i + 1]);
+		}
+		
+		// Cut string apart
+		int lastsplit = 0;
+		
+		int laddr = 0;
+		AddrGen ag = new AddrGen();
+		for(int i = 0; i < toformat.length(); i++) {
+			String s = toformat.substring(i);
+			
+			for (int j = 0; j < inpstrings.size(); j++) {
+				String ft = inpstrings.get(j);
+				if(s.startsWith(ft)) {
+					
+					// This is the stuff between the memory positions
+					ag.doNext(sb, toformat.substring(lastsplit, i), laddr);
+					
+					// Remember this address for next time (we're taking the stuff before the address)
+					laddr = inptos.get(j);
+					
+					// Jump forward so we don't re-read the processed parts
+					lastsplit = (i += ft.length());
+					
+					break;
+				}
+			}
+		}
+		
+		// If there's more stuff after the last address location, add it
+		if(lastsplit != toformat.length())
+			ag.doNext(sb, toformat.substring(lastsplit), laddr);
+		
+		ag.reset(sb);
+		
+		return sb;
+	}
+	
 	public void reset(StringBuilder sb) {
 		sb.append(AddrGen.getAddrTo(lastaddr, 0));
 	}
