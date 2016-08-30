@@ -9,6 +9,9 @@ public final class Optimizer {
 		for(char c : inp.toCharArray()) {
 			if((c == '>' && sb.charAt(sb.length() - 1) == '<') || (c == '<' && sb.charAt(sb.length() - 1) == '>'))
 				sb = sb.deleteCharAt(sb.length() - 1);
+			else if((c == '>' && sb.charAt(sb.length() - 1) == '#' && sb.charAt(sb.length() - 2) == '<') || 
+					(c == '<' && sb.charAt(sb.length() - 1) == '#' && sb.charAt(sb.length() - 2) == '>'))
+				sb = sb.deleteCharAt(sb.length() - 2);
 			else
 				sb.append(c);
 		}
