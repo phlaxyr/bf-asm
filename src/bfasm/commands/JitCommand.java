@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import bfasm.generators.AddrGen;
 
-public class JitCommand extends Command {
+public class JitCommand extends Command implements BranchingCommand {
 	
 	public int mem, to;
 	
@@ -27,16 +27,10 @@ public class JitCommand extends Command {
 	public String getBf() {
 		StringBuilder sb = new StringBuilder();
 		
-		AddrGen addr = new AddrGen();
-		
-		addr.doNext(sb, "[->+<", AddrGen.getDataCell(mem));
-		addr.doNext(sb, "[-]+", AddrGen.getTempCell(mem + 1));
-		addr.doNext(sb, "]>[-<+>]<", AddrGen.getDataCell(mem));
-		addr.doNext(sb, "[-", AddrGen.getTempCell(mem + 1));
-		addr.doNext(sb, "+", AddrGen.getLabelCell(to, labels));
-		addr.doNext(sb, "]", AddrGen.getTempCell(mem + 1));
-		
-		addr.reset(sb);
+		AddrGen.doFormat(sb, "mem[->+<tmp[-]+mem]>[-<+>]<tmp[-lbl+tmp]", 
+				"mem", AddrGen.getDataCell(mem),
+				"tmp", AddrGen.getTempCell(mem + 1),
+				"lbl", AddrGen.getLabelCell(to, labels));
 		
 		return sb.toString();
 	}
