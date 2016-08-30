@@ -3,6 +3,8 @@ package bfasm.commands;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import bfasm.generators.AddrGen;
+
 public class LblCommand extends ParentCommand {
 	
 	ArrayList<Command> subcommands = new ArrayList<>();
@@ -38,14 +40,28 @@ public class LblCommand extends ParentCommand {
 		subcommands.add(command);
 	}
 
+	/*
+	 * Command#getBf() ugly fix- to be replaced with a "more OO" way
+	 * 		~minerguy31
+	 */
+	
 	@Override
 	public String getBf() {
 		StringBuilder sb = new StringBuilder();
+		AddrGen ag = new AddrGen();
 		
 		for(Command c : subcommands)
-			sb.append(c.getBf());
+			sb.append(c.getBf(ag));
+		
+		ag.reset(sb);
 		
 		return sb.toString();
+	}
+	
+	// Should never, ever run
+	@Override
+	public String getBf(AddrGen ag) {
+		throw new UnsupportedOperationException("");
 	}
 
 	@Override
