@@ -34,7 +34,11 @@ public class Parser {
 		ArrayList<Command> cmds = new ArrayList<>();
 		
 		while(fscan.hasNext()) {
-			String line = fscan.nextLine();
+			String line = fscan.nextLine().trim();
+			
+			if(line.isEmpty())
+				continue;
+			
 			Command c = Command.getCommand(line);
 			
 			cmds.add(c);
