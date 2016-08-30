@@ -16,10 +16,10 @@ public class NotCommand extends Command {
 	}
 
 	@Override
-	public String getBf() {
+	public String getBf(AddrGen ag) {
 		StringBuilder sb = new StringBuilder();
 		
-		AddrGen.doFormat(sb, "a[->+<t1[-]+a]t0[-<+>]t1-[+<+>]", 
+		AddrGen.doFormat(ag, sb, "a[->+<t1[-]+a]t0[-<+>]t1-[+<+>]", 
 				"a", AddrGen.getDataCell(arg0),
 				"b", AddrGen.getDataCell(arg1),
 				"t0", AddrGen.getTempCell(arg0),

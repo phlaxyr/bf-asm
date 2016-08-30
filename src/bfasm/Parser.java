@@ -25,9 +25,10 @@ public class Parser {
 		OutCommand.register();
 		JitCommand.register();
 		NotCommand.register();
-		GtrCommand.register();	//Not fully done yet, must be fixed
+		GtrCommand.register();
 		BptCommand.register();
 		JmpCommand.register();
+		LeqCommand.register();
 	}
 	
 	public String getBf() {
@@ -35,7 +36,11 @@ public class Parser {
 		ArrayList<Command> cmds = new ArrayList<>();
 		
 		while(fscan.hasNext()) {
-			String line = fscan.nextLine();
+			String line = fscan.nextLine().trim();
+			
+			if(line.isEmpty())
+				continue;
+			
 			Command c = Command.getCommand(line);
 			
 			cmds.add(c);

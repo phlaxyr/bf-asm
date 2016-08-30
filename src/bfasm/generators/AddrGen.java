@@ -73,7 +73,7 @@ public class AddrGen {
 		return sb;
 	}
 	
-	public static StringBuilder doFormat(StringBuilder sb, String toformat, Object...inp) {
+	public static StringBuilder doFormat(AddrGen ag, StringBuilder sb, String toformat, Object...inp) {
 		ArrayList<String> inpstrings = new ArrayList<>();
 		ArrayList<Integer> inptos = new ArrayList<>();
 		
@@ -87,7 +87,6 @@ public class AddrGen {
 		int lastsplit = 0;
 		
 		int laddr = 0;
-		AddrGen ag = new AddrGen();
 		for(int i = 0; i < toformat.length(); i++) {
 			String s = toformat.substring(i);
 			
@@ -113,7 +112,6 @@ public class AddrGen {
 		if(lastsplit != toformat.length())
 			ag.doNext(sb, toformat.substring(lastsplit), laddr);
 		
-		ag.reset(sb);
 		
 		return sb;
 	}

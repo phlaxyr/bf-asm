@@ -16,10 +16,10 @@ public class AddCommand extends Command {
 	}
 
 	@Override
-	public String getBf() {
+	public String getBf(AddrGen ag) {
 		StringBuilder sb = new StringBuilder();
 
-		AddrGen.doFormat(sb, "b[-a+t+b]t[-<+>]", 
+		AddrGen.doFormat(ag, sb, "b[-a+t+b]t[-<+>]", 
 				"a", AddrGen.getDataCell(arg0),
 				"b", AddrGen.getDataCell(arg1),
 				"t", AddrGen.getTempCell(arg1)
