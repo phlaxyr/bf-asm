@@ -24,10 +24,10 @@ public class JitCommand extends Command implements BranchingCommand {
 	}
 	
 	@Override
-	public String getBf() {
+	public String getBf(AddrGen ag) {
 		StringBuilder sb = new StringBuilder();
 		
-		AddrGen.doFormat(sb, "mem[->+<tmp[-]+mem]>[-<+>]<tmp[-lbl+tmp]", 
+		AddrGen.doFormat(ag, sb, "mem[->+<tmp[-]+mem]>[-<+>]<tmp[-lbl+tmp]", 
 				"mem", AddrGen.getDataCell(mem),
 				"tmp", AddrGen.getTempCell(mem + 1),
 				"lbl", AddrGen.getLabelCell(to, labels));
