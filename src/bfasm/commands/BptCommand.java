@@ -1,5 +1,7 @@
 package bfasm.commands;
 
+import bfasm.generators.AddrGen;
+
 public class BptCommand extends Command {
 
 	private BptCommand() {
@@ -11,7 +13,7 @@ public class BptCommand extends Command {
 	}
 
 	@Override
-	public String getBf() {
+	public String getBf(AddrGen ag) {
 		return "#";
 	}
 

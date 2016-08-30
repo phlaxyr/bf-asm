@@ -16,10 +16,10 @@ public class MovCommand extends Command {
 	}
 
 	@Override
-	public String getBf() {
+	public String getBf(AddrGen ag) {
 		StringBuilder sb = new StringBuilder();
 		
-		AddrGen.doFormat(sb, "b[-]a[-b+tmp+a]tmp[-<+>]", 
+		AddrGen.doFormat(ag, sb, "b[-]a[-b+tmp+a]tmp[-<+>]", 
 				"a", AddrGen.getDataCell(arg0),
 				"b", AddrGen.getDataCell(arg1),
 				"tmp", AddrGen.getTempCell(arg0));

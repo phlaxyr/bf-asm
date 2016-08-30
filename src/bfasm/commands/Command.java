@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Formatter;
 
+import bfasm.generators.AddrGen;
+
 public abstract class Command {
 	private static final ArrayList<Command> commands = new ArrayList<>();
 	
@@ -11,7 +13,9 @@ public abstract class Command {
 		setArgs(args);
 	}
 	
-	public abstract String getBf();
+	public String getBf() { return getBf(new AddrGen()); }
+	
+	public abstract String getBf(AddrGen ag);
 	
 	public abstract String getMnemonic();
 

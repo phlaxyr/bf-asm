@@ -42,10 +42,10 @@ public class SetCommand extends Command {
 	}
 
 	@Override
-	public String getBf() {
+	public String getBf(AddrGen ag) {
 		StringBuilder ret = new StringBuilder();
 
-		AddrGen.doAt(ret, "[-]" + NumberGen.getConstant(arg1), AddrGen.getDataCell(arg0));
+		ag.doNext(ret, "[-]" + NumberGen.getConstant(arg1), AddrGen.getDataCell(arg0));
 		
 		return ret.toString();
 	}

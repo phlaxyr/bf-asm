@@ -5,13 +5,14 @@ public final class Optimizer {
 	private Optimizer() {}
 	
 	public static String removeRedundancy(String inp) {
-		StringBuilder sb = new StringBuilder(" ");
+		// The single character here is an ugly, one-off fix. 
+		StringBuilder sb = new StringBuilder(".");
+
 		for(char c : inp.toCharArray()) {
-			if((c == '>' && sb.charAt(sb.length() - 1) == '<') || (c == '<' && sb.charAt(sb.length() - 1) == '>'))
+			char prevc = sb.charAt(sb.length() - 1);
+			if((c == '>' && prevc == '<') || (c == '<' && prevc == '>') ||
+				(c == '+' && prevc == '-') || (c == '-' && prevc == '+'))
 				sb = sb.deleteCharAt(sb.length() - 1);
-			else if((c == '>' && sb.charAt(sb.length() - 1) == '#' && sb.charAt(sb.length() - 2) == '<') || 
-					(c == '<' && sb.charAt(sb.length() - 1) == '#' && sb.charAt(sb.length() - 2) == '>'))
-				sb = sb.deleteCharAt(sb.length() - 2);
 			else
 				sb.append(c);
 		}

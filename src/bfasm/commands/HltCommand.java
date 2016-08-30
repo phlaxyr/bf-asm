@@ -1,5 +1,7 @@
 package bfasm.commands;
 
+import bfasm.generators.AddrGen;
+
 public class HltCommand extends Command {
 
 	private HltCommand() {
@@ -11,8 +13,12 @@ public class HltCommand extends Command {
 	}
 
 	@Override
-	public String getBf() {
-		return "[-]";
+	public String getBf(AddrGen ag) {
+		StringBuilder sb = new StringBuilder();
+		
+		ag.doNext(sb, "[-]", 0);
+		
+		return sb.toString();
 	}
 
 	@Override

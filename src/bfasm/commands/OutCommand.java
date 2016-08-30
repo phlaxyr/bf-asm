@@ -15,10 +15,10 @@ public class OutCommand extends Command {
     }
 
     @Override
-    public String getBf() {
+    public String getBf(AddrGen ag) {
         StringBuilder sb = new StringBuilder();
 
-        AddrGen.doAt(sb, ".", AddrGen.getDataCell(arg0));
+        ag.doNext(sb, ".", AddrGen.getDataCell(arg0));
 
         return sb.toString();
     }

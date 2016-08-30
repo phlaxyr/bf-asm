@@ -44,10 +44,10 @@ public class JmpCommand extends Command implements BranchingCommand {
 	}
 
 	@Override
-	public String getBf() {
+	public String getBf(AddrGen ag) {
 		StringBuilder ret = new StringBuilder();
 
-		AddrGen.doAt(ret, "+", AddrGen.getLabelCell(to_addr, labels));
+		ag.doNext(ret, "+", AddrGen.getLabelCell(to_addr, labels));
 		
 		return ret.toString();
 	}
