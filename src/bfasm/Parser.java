@@ -25,9 +25,10 @@ public class Parser {
 		OutCommand.register();
 		JitCommand.register();
 		NotCommand.register();
-		GtrCommand.register();	//Not fully done yet, must be fixed
+		GtrCommand.register();
 		BptCommand.register();
 		JmpCommand.register();
+		LeqCommand.register();
 	}
 	
 	public String getBf() {
