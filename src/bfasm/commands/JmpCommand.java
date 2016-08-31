@@ -3,9 +3,10 @@ package bfasm.commands;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import bfasm.Parser;
 import bfasm.generators.AddrGen;
 
-public class JmpCommand extends Command implements BranchingCommand {
+public class JmpCommand extends BranchingCommand {
 	int to_addr;
 	ArrayList<LblCommand> labels;
 	
@@ -61,4 +62,8 @@ public class JmpCommand extends Command implements BranchingCommand {
 		this.labels = labels;
 	}
 
+	@Override
+	public int jmpPos() {
+		return 0;
+	}
 }

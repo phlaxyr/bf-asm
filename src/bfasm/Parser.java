@@ -2,6 +2,7 @@ package bfasm;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import bfasm.commands.*;
@@ -9,6 +10,8 @@ import bfasm.generators.Preprocessor;
 
 
 public class Parser {
+
+	
 	Scanner fscan;
 	
 	public Parser(Scanner fscan) {
@@ -35,18 +38,34 @@ public class Parser {
 	}
 	
 	public String getBf() {
-		
+		HashMap<String, Integer> lblnames = new HashMap<>();
 		ArrayList<Command> cmds = new ArrayList<>();
 		
+		// TODO: Clean up ugly mess that allows for LBL
+		
+		int lblnum = 1;
+		ArrayList<String> cmdstrs = new ArrayList<>();
+		
 		while(fscan.hasNext()) {
+			
 			String line = Preprocessor.preParse(fscan.nextLine().trim());
 			
 			if(line.isEmpty())
 				continue;
 			
-			Command c = Command.getCommand(line);
+			cmdstrs.add(line);
 			
-			cmds.add(c);
+			if(line.startsWith("LBL ")) {
+				String a1 = line.split(" ", 3)[1];
+				if(!a1.matches("-?\\d+(\\.\\d+)?"))
+					lblnames.put(a1, lblnum++);
+				else
+					lblnames.put(a1, Integer.parseInt(a1));
+			}
+		}
+		
+		for(String line : cmdstrs) {
+			cmds.add(Command.getCommand(line, lblnames));
 		}
 		
 		ArrayList<LblCommand> labels = new ArrayList<>();
