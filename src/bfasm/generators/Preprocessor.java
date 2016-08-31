@@ -18,7 +18,10 @@ public class Preprocessor {
 	}
 	
 	public static String preParse(String line) {
-
+		
+		// Implementation for comments
+		line = line.split("`", 2) [0];
+		
 		PreprocessCommand pc = commands.getOrDefault(line.split(" ", 2)[0], null);
 		
 		if(pc != null)
