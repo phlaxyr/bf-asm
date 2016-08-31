@@ -56,7 +56,7 @@ public class Parser {
 			cmdstrs.add(line);
 			
 			if(line.startsWith("LBL ")) {
-				String a1 = line.split(" ", 3)[1];
+				String a1 = line.split(" ", 3)[1].trim();
 				if(!a1.matches("-?\\d+(\\.\\d+)?"))
 					lblnames.put(a1, lblnum++);
 				else
