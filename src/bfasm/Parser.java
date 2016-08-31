@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Scanner;
 
 import bfasm.commands.*;
+import bfasm.generators.Preprocessor;
 
 
 public class Parser {
@@ -29,6 +30,8 @@ public class Parser {
 		BptCommand.register();
 		JmpCommand.register();
 		LeqCommand.register();
+		
+		Preprocessor.register();
 	}
 	
 	public String getBf() {
@@ -36,7 +39,7 @@ public class Parser {
 		ArrayList<Command> cmds = new ArrayList<>();
 		
 		while(fscan.hasNext()) {
-			String line = fscan.nextLine().trim();
+			String line = Preprocessor.preParse(fscan.nextLine().trim());
 			
 			if(line.isEmpty())
 				continue;
