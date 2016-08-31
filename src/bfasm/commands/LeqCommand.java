@@ -1,5 +1,7 @@
 package bfasm.commands;
 
+import bfasm.generators.AddrGen;
+
 public class LeqCommand extends Command {
 
 	private int arg0;
@@ -15,8 +17,8 @@ public class LeqCommand extends Command {
 	}
 
 	@Override
-	public String getBf() {
-		return new GtrCommand(new int[]{arg1, arg0, outp}).getBf();
+	public String getBf(AddrGen ag) {
+		return new GtrCommand(new int[]{arg1, arg0, outp}).getBf(ag);
 	}
 
 	@Override

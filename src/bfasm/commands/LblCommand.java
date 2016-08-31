@@ -2,11 +2,14 @@ package bfasm.commands;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
+import bfasm.Parser;
 import bfasm.generators.AddrGen;
 
-public class LblCommand extends ParentCommand {
+public class LblCommand extends BranchingCommand {
 	
+	public static int curlbl = 1;
 	ArrayList<Command> subcommands = new ArrayList<>();
 	
 	public static ArrayList<LblCommand> uhm = new ArrayList<>();
@@ -24,18 +27,15 @@ public class LblCommand extends ParentCommand {
 		lblnum = args[0];
 	}
 
-	@Override
 	public ArrayList<Command> getSubCommands() {
 		return subcommands;
 	}
 
-	@Override
 	public void setSubCommands(ArrayList<Command> commands) {
 		subcommands = new ArrayList<>(commands);
 
 	}
 
-	@Override
 	public void addCommand(Command command) {
 		subcommands.add(command);
 	}
@@ -121,13 +121,16 @@ public class LblCommand extends ParentCommand {
 		return prepos.toString();
 	}
 	
-
-
 	public static void register() {
 		Command.registerCommand(new LblCommand());
 	}
 	
 	protected static void clear() {
 		uhm.clear();
+	}
+
+	@Override
+	public int jmpPos() {
+		return 0;
 	}
 }

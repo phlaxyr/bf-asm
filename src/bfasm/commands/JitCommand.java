@@ -1,10 +1,11 @@
 package bfasm.commands;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import bfasm.generators.AddrGen;
 
-public class JitCommand extends Command implements BranchingCommand {
+public class JitCommand extends BranchingCommand {
 	
 	public int mem, to;
 	
@@ -66,4 +67,8 @@ public class JitCommand extends Command implements BranchingCommand {
 		Command.registerCommand(new JitCommand());
 	}
 
+	@Override
+	public int jmpPos() {
+		return 1;
+	}
 }
