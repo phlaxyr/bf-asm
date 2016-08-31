@@ -3,6 +3,7 @@ package bfasm.generators;
 import java.util.HashMap;
 
 import bfasm.commands.preprocessor.DefCommand;
+import bfasm.commands.preprocessor.MallocCommand;
 import bfasm.commands.preprocessor.PreprocessCommand;
 
 public class Preprocessor {
@@ -13,6 +14,7 @@ public class Preprocessor {
 	
 	public static void register() {
 		DefCommand.register();
+		MallocCommand.register();
 	}
 	
 	public static String preParse(String line) {
