@@ -1,0 +1,4 @@
+#MACRO (\w[\w\d]*)\s*=\s*(-?\d+)->SET $1 $2
+#MACRO (\w[\w\d]*)\s*\=\s*(\w[\w\d]*)->MOV $1 $2
+#MACRO (\w[\w\d]*)\s*\+=\s*(\w[\w\d]*)->ADD $1 $2
+#MACRO (\w[\w\d]*)\s*-=\s*(\w[\w\d]*)->SUB $1 $2
