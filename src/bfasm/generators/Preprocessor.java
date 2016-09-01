@@ -3,6 +3,7 @@ package bfasm.generators;
 import java.util.HashMap;
 
 import bfasm.commands.preprocessor.DefCommand;
+import bfasm.commands.preprocessor.MacroCommand;
 import bfasm.commands.preprocessor.MallocCommand;
 import bfasm.commands.preprocessor.PreprocessCommand;
 
@@ -15,12 +16,14 @@ public class Preprocessor {
 	public static void register() {
 		DefCommand.register();
 		MallocCommand.register();
+		MacroCommand.register();
 	}
 	
 	public static String preParse(String line) {
 		
 		// Implementation for comments
-		line = line.split("`", 2) [0].trim();
+		line = line.split("`", 2) [0]
+				.trim();
 		
 		PreprocessCommand pc = commands.getOrDefault(line.split(" ", 2)[0], null);
 		
