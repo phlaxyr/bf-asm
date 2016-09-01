@@ -17,7 +17,7 @@ public class GtrCommand extends Command {
 	}
 
 	@Override
-	public String getBf() {
+	public String getBf(AddrGen ag) {
 		StringBuilder sb = new StringBuilder();
 
 		int t1 = 2 + Math.max(AddrGen.getTempCell(arg0), AddrGen.getTempCell(arg1));
@@ -26,7 +26,7 @@ public class GtrCommand extends Command {
 		int b = 4 + Math.max(AddrGen.getTempCell(arg0), AddrGen.getTempCell(arg1));
 		int a = AddrGen.getDataCell(arg0) + 1;
 		
-		AddrGen.doFormat(sb, "d0[->+>>+<<<]>>>[-<<<+>>>]<<<d1[-y+t2+d1]t2[-d1+t2]"	// Copy to a and b
+		AddrGen.doFormat(ag, sb, "d0[->+>>+<<<]>>>[-<<<+>>>]<<<d1[-y+t2+d1]t2[-d1+t2]"	// Copy to a and b
 				+ "z[-]x[t0+y[-t0[-]t1+y]t0[-z+t0]t1[-y+t1]y-x-]y[-]", 		// The actual grunt work
 				"x", a, 
 				"y", b, 
