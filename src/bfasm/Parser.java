@@ -35,6 +35,7 @@ public class Parser {
 		BptCommand.register();
 		JmpCommand.register();
 		LeqCommand.register();
+		IncCommand.register();
 		
 		Preprocessor.register();
 	}
