@@ -1,9 +1,28 @@
-#MACRO (\w[\w\d]*)\s*=\s*(-?\d+)->SET $1 $2
-#MACRO (\w[\w\d]*)\s*\=\s*(\w[\w\d]*)->MOV $1 $2
+ `` STDLIB.BFA - bfASM standard library `` 
+ ``  Copyright (c) 2016 - Public Domain `` 
+
+ ` Handle assignment of the form a = N where N is a number
+#MACRO (\w[\w\d]*)\s*=\s*([-|+]?\d+)->SET $1 $2
+
+ ` Handle assignment of the form a = b where b is a variable
+#MACRO (\w[\w\d]*)\s*\=\s*([A-Za-z_][\w\d]*)->MOV $2 $1
+
+ ` Handle compound assignment of the form a += b where b is a variable
 #MACRO (\w[\w\d]*)\s*\+=\s*(\w[\w\d]*)->ADD $1 $2
+
+ ` Handle compound assignment of the form a -= b where b is a variable
 #MACRO (\w[\w\d]*)\s*-=\s*(\w[\w\d]*)->SUB $1 $2
+
+ ` Handle compound assignment of the form a += N where N is a number
 #MACRO (\w[\w\d]*)\s*\+=\s*(-?\d+)->INC $1 $2
-#MACRO (\w[\w\d]*)\s*-=\s*(\d+)->INC $1 -$2
+
+ ` Handle compound assignment of the form a -= N where N is a number
+#MACRO (\w[\w\d]*)\s*-=\s*(\+?\d+)->INC $1 -$2
 #MACRO (\w[\w\d]*)\s*-=\s*(-\d+)->INC $1 $2
+
+ ` Handle increment and decrement
 #MACRO (\w[\w\d]*)\s*\+\+->INC $1 1
 #MACRO (\w[\w\d]*)\s*--->INC $1 -1
+
+ ` Handle variable declaration (shorthand for #MALLOC)
+#MACRO var\s*(\w[\w\d]*)\s*->#MALLOC $1
