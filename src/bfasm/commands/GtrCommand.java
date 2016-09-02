@@ -17,27 +17,26 @@ public class GtrCommand extends Command {
 	}
 
 	@Override
-	public String getBf() {
+	public String getBf(AddrGen ag) {
 		StringBuilder sb = new StringBuilder();
 
 		int t1 = 2 + Math.max(AddrGen.getTempCell(arg0), AddrGen.getTempCell(arg1));
 		int t2 = 6 + Math.max(AddrGen.getTempCell(arg0), AddrGen.getTempCell(arg1));
+		int t3 = 8 + Math.max(AddrGen.getTempCell(arg0), AddrGen.getTempCell(arg1));
 		int b = 4 + Math.max(AddrGen.getTempCell(arg0), AddrGen.getTempCell(arg1));
 		int a = AddrGen.getDataCell(arg0) + 1;
-		AddrGen ag = new AddrGen();
-
-		ag.doNext(sb, "[->+>>+<<<]>>>[-<<<+>>>]<<<", AddrGen.getDataCell(arg0));
-		ag.doNext(sb, "[-", AddrGen.getDataCell(arg1));
-		ag.doNext(sb, "+", b);
-		ag.doNext(sb, "+", t2);
-		ag.doNext(sb, "]", AddrGen.getDataCell(arg1));
-		ag.doNext(sb, "[-", t2);
-		ag.doNext(sb, "+", AddrGen.getDataCell(arg1));
-		ag.doNext(sb, "]", t2);
 		
-			/* TODO: Finish GTR */
-		
-		ag.reset(sb);
+		AddrGen.doFormat(ag, sb, "d0[->+>>+<<<]>>>[-<<<+>>>]<<<d1[-y+t2+d1]t2[-d1+t2]"	// Copy to a and b
+				+ "z[-]x[t0+y[-t0[-]t1+y]t0[-z+t0]t1[-y+t1]y-x-]y[-]", 		// The actual grunt work
+				"x", a, 
+				"y", b, 
+				"d0", AddrGen.getDataCell(arg0), 
+				"d1", AddrGen.getDataCell(arg1), 
+				"t0", t1, 
+				"t2", t2,
+				"t1", t3,
+				"z", AddrGen.getDataCell(outp)
+				);
 		
 		return sb.toString();
 	}
