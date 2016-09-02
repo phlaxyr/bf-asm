@@ -20,7 +20,6 @@ public class MacroCommand extends PreprocessCommand {
 			line = "";
 		} else for(Entry<String, String> e : definitions.entrySet()) {
 			line = line.replaceAll(e.getKey(), e.getValue());
-			System.out.println("a = 1".replaceAll("(\\w[\\w\\d]?)+\\s*=\\s*(-?\\d+)", "SET \\0 \\1"));
 		}
 		
 		
