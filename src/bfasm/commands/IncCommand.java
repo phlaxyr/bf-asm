@@ -3,20 +3,20 @@ package bfasm.commands;
 import bfasm.generators.AddrGen;
 import bfasm.generators.NumberGen;
 
-public class SetCommand extends Command {
+public class IncCommand extends Command {
 	int arg0, arg1;
 	
-	private SetCommand() {
+	private IncCommand() {
 		super(new int[]{0,0});
 	}
 	
-	public SetCommand(int[] args) {
+	public IncCommand(int[] args) {
 		super(args);
 	}
 	
 	@Override
 	public String getMnemonic() {
-		return "SET";
+		return "INC";
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class SetCommand extends Command {
 	public Command setArgs(int[] args) {
 		
 		if(args.length != 2)
-			throw new RuntimeException("Incorrect number of arguments to SET! Expected 2, got "+args.length);
+			throw new RuntimeException("Incorrect number of arguments to INC! Expected 2, got "+args.length);
 		
 		this.arg0 = args[0];
 		this.arg1 = args[1];
@@ -38,20 +38,20 @@ public class SetCommand extends Command {
 
 	@Override
 	public Command getClone(int[] args) {
-		return new SetCommand(args);
+		return new IncCommand(args);
 	}
 
 	@Override
 	public String getBf(AddrGen ag) {
 		StringBuilder ret = new StringBuilder();
 
-		ag.doNext(ret, "[-]" + NumberGen.getConstant(arg1), AddrGen.getDataCell(arg0));
+		ag.doNext(ret, NumberGen.getConstant(arg1), AddrGen.getDataCell(arg0));
 		
 		return ret.toString();
 	}
 
 	public static void register() {
-		Command.registerCommand(new SetCommand());
+		Command.registerCommand(new IncCommand());
 	}
 
 }

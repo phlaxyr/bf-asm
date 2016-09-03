@@ -1,5 +1,9 @@
 package bfasm.generators;
 
+import java.util.ArrayList;
+
+import bfasm.commands.LblCommand;
+
 public class AddrGen {
 	private int lastaddr = 0;
 	
@@ -34,7 +38,15 @@ public class AddrGen {
 		return 2 * cellnum + 3;
 	}
 	
-	public static int getLabelCell(int cellnum) {
+	public static int getLabelCell(int cellnum, ArrayList<LblCommand> labels) {
+		
+		for(int i = 0;i < labels.size(); i++) {
+			if(labels.get(i).lblnum == cellnum) {
+				cellnum = i;
+				break;
+			}
+		}
+		
 		return -cellnum-1;
 	}
 	
@@ -58,6 +70,49 @@ public class AddrGen {
 		sb.append(ins);
 		
 		lastaddr = to;
+		return sb;
+	}
+	
+	public static StringBuilder doFormat(AddrGen ag, StringBuilder sb, String toformat, Object...inp) {
+		ArrayList<String> inpstrings = new ArrayList<>();
+		ArrayList<Integer> inptos = new ArrayList<>();
+		
+		// Get all the string / int pairs
+		for(int i = 0; i < inp.length; i += 2) {
+			inpstrings.add((String) inp[i]);
+			inptos.add((int) inp[i + 1]);
+		}
+		
+		// Cut string apart
+		int lastsplit = 0;
+		
+		int laddr = 0;
+		for(int i = 0; i < toformat.length(); i++) {
+			String s = toformat.substring(i);
+			
+			for (int j = 0; j < inpstrings.size(); j++) {
+				String ft = inpstrings.get(j);
+				if(s.startsWith(ft)) {
+					
+					// This is the stuff between the memory positions
+					ag.doNext(sb, toformat.substring(lastsplit, i), laddr);
+					
+					// Remember this address for next time (we're taking the stuff before the address)
+					laddr = inptos.get(j);
+					
+					// Jump forward so we don't re-read the processed parts
+					lastsplit = (i += ft.length());
+					
+					break;
+				}
+			}
+		}
+		
+		// If there's more stuff after the last address location, add it
+		if(lastsplit != toformat.length())
+			ag.doNext(sb, toformat.substring(lastsplit), laddr);
+		
+		
 		return sb;
 	}
 	

@@ -2,16 +2,16 @@ package bfasm.commands;
 
 import bfasm.generators.AddrGen;
 
-public class MovCommand extends Command {
+public class NotCommand extends Command {
 
 	private int arg0;
 	private int arg1;
-
-	private MovCommand() {
+	
+	private NotCommand() {
 		super(new int[]{0,0});
 	}
-
-	public MovCommand(int[] args) {
+	
+	public NotCommand(int[] args) {
 		super(args);
 	}
 
@@ -19,29 +19,30 @@ public class MovCommand extends Command {
 	public String getBf(AddrGen ag) {
 		StringBuilder sb = new StringBuilder();
 		
-		AddrGen.doFormat(ag, sb, "b[-]a[-b+tmp+a]tmp[-<+>]", 
+		AddrGen.doFormat(ag, sb, "a[->+<t1[-]+a]t0[-<+>]t1-[+<+>]", 
 				"a", AddrGen.getDataCell(arg0),
 				"b", AddrGen.getDataCell(arg1),
-				"tmp", AddrGen.getTempCell(arg0));
+				"t0", AddrGen.getTempCell(arg0),
+				"t1", AddrGen.getTempCell(arg1));
 		
 		return sb.toString();
 	}
 
 	@Override
 	public String getMnemonic() {
-		return "MOV";
+		return "NOT";
 	}
 
 	@Override
 	public int[] getArgs() {
-		return new int[]{arg0,arg1};
+		return new int[]{arg0, arg1};
 	}
 
 	@Override
 	public Command setArgs(int[] args) {
 		
 		if(args.length != 2)
-			throw new RuntimeException("Incorrect number of arguments to MOV! Expected 2, got "+args.length);
+			throw new RuntimeException("Incorrect number of arguments to NOT! Expected 2, got "+args.length);
 		
 		this.arg0 = args[0];
 		this.arg1 = args[1];
@@ -51,11 +52,11 @@ public class MovCommand extends Command {
 
 	@Override
 	public Command getClone(int[] args) {
-		return new MovCommand(args);
+		return new NotCommand(args);
 	}
 
 	public static void register() {
-		Command.registerCommand(new MovCommand());
+		Command.registerCommand(new NotCommand());
 	}
-	
+
 }

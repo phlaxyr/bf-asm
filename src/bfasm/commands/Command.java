@@ -3,6 +3,9 @@ package bfasm.commands;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Formatter;
+import java.util.HashMap;
+
+import bfasm.generators.AddrGen;
 
 public abstract class Command {
 	private static final ArrayList<Command> commands = new ArrayList<>();
@@ -11,7 +14,9 @@ public abstract class Command {
 		setArgs(args);
 	}
 	
-	public abstract String getBf();
+	public String getBf() { return getBf(new AddrGen()); }
+	
+	public abstract String getBf(AddrGen ag);
 	
 	public abstract String getMnemonic();
 
@@ -27,7 +32,7 @@ public abstract class Command {
 		return commands;
 	}
 	
-	public static final Command getCommand(String line) {
+	public static final Command getCommand(String line, HashMap<String, Integer> lblnames) {
 		
 		String[] str = line.split(" ");
 		String mnemonic = null;
@@ -43,11 +48,18 @@ public abstract class Command {
 		if(mnemonic == null)
 			throw new RuntimeException("Invalid mnemonic: " + str[0]);
 		
+		int[] args = cmd.toArgs(str, lblnames);
+		
+		return cmd.getClone(args);
+	}
+	
+	public int[] toArgs(String[] str, HashMap<String, Integer> lblnames) {
 		int[] args = new int[str.length - 1];
+		
 		for(int i = 1; i < str.length; i++)
 			args[i - 1] = Integer.parseInt(str[i]);
 		
-		return cmd.getClone(args);
+		return args;
 	}
 	
 	public abstract Command getClone(int[] args);
@@ -59,4 +71,6 @@ public abstract class Command {
 		formatter.close();
 		return s;
 	}
+
+	public void setLabels(ArrayList<LblCommand> labels) { }
 }

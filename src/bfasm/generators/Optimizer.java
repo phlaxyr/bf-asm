@@ -5,9 +5,13 @@ public final class Optimizer {
 	private Optimizer() {}
 	
 	public static String removeRedundancy(String inp) {
-		StringBuilder sb = new StringBuilder(" ");
+		// The single character here is an ugly, one-off fix. 
+		StringBuilder sb = new StringBuilder(".");
+
 		for(char c : inp.toCharArray()) {
-			if((c == '>' && sb.charAt(sb.length() - 1) == '<') || (c == '<' && sb.charAt(sb.length() - 1) == '>'))
+			char prevc = sb.charAt(sb.length() - 1);
+			if((c == '>' && prevc == '<') || (c == '<' && prevc == '>') ||
+				(c == '+' && prevc == '-') || (c == '-' && prevc == '+'))
 				sb = sb.deleteCharAt(sb.length() - 1);
 			else
 				sb.append(c);
@@ -29,7 +33,7 @@ public final class Optimizer {
 		
 		for(int i = ret.length() - 1; i > 0; i--) {
 			char c = ret.charAt(i);
-			if(c == '<' || c == '>') 
+			if(c == '<' || c == '>' || c == '+' || c == '-' || c == ',') 
 				continue;
 			else {
 				ret = ret.substring(0, i + 1);
